@@ -11,7 +11,7 @@ const StyledNav = styled.div`
 const StyledUlContainer = styled.div`
   display: flex;
   justify-content: space-around;
-  padding: 40px 0;
+  padding: 30px 0;
   font-family: LatoBold;
   max-width: 1300px;
   margin: auto;
@@ -43,15 +43,14 @@ const StyledLi = styled.li`
 `;
 
 const LogoContainer = styled.div`
-  font-size: 2.75em;
+  font-size: 2.5em;
   font-weight: bold;
-  font-family: RalewayBold;
   min-width: 180px;
   text-align: center;
 `;
 
 const StyledLogo = styled.p`
-  background: linear-gradient(to top left, #ff512f, #f09819);
+  background: linear-gradient(to top left, #f3f, #f09819);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
