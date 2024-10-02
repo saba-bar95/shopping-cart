@@ -1,6 +1,6 @@
 import Navbar from "../../Components/Navbar/Navbar";
 
-const Cart = () => {
+const Shop = () => {
   return (
     <>
       <Navbar />;
@@ -8,4 +8,4 @@ const Cart = () => {
   );
 };
 
-export default Cart;
+export default Shop;

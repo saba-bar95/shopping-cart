@@ -1,5 +1,5 @@
 import Home from "./Pages/Home/Home";
-import Cart from "./Pages/Cart/Cart";
+import Shop from "./Pages/Shop/Shop";
 import ScrollToTop from "./ScrollToTop";
 
 const routes = [
@@ -13,11 +13,11 @@ const routes = [
     ),
   },
   {
-    path: "/cart",
+    path: "/shop",
     element: (
       <>
         <ScrollToTop />
-        <Cart />
+        <Shop />
       </>
     ),
   },
