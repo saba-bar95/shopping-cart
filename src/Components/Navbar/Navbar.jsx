@@ -1,31 +1,9 @@
+// components/Navbar/Navbar.js
 import { Link } from "react-router-dom";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
+import { FadeIn, FadeInLogo } from "../../styles/animations";
 
-const fadeIn = keyframes`
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-`;
-
-const fadeInLogo = keyframes`
-  0% {
-    opacity: 0;
-    letter-spacing: -0.2em
-  }
-  50% {
-    opacity: 0.5;
-    letter-spacing: -0.1em;
-  }
-  100% {
-    opacity: 1;
-    letter-spacing: 0;
-  }
-`;
-
-const StyledNav = styled.nav`
+const StyledNav = styled.div`
   background-color: #8cd0e3;
   width: 100%;
 `;
@@ -33,7 +11,7 @@ const StyledNav = styled.nav`
 const StyledUlContainer = styled.div`
   display: flex;
   justify-content: space-around;
-  padding: 15px 30px;
+  padding: 40px 0;
   font-family: LatoBold;
   max-width: 1300px;
   margin: auto;
@@ -49,7 +27,7 @@ const StyledUl = styled.ul`
 const StyledLi = styled.li`
   padding: 7px;
   transition: transform 0.3s ease-in-out;
-  font-size: 1.3em;
+  font-size: 1.5em;
   text-decoration: none;
   background: linear-gradient(to top left, #1e3c72, #1e3c72, #2a5298);
   background-clip: text;
@@ -57,7 +35,7 @@ const StyledLi = styled.li`
   -webkit-text-fill-color: transparent;
   cursor: pointer;
   opacity: 0;
-  animation: ${fadeIn} 1s ease-in-out forwards;
+  animation: ${FadeIn} 1s ease-in-out forwards;
 
   &:hover {
     transform: scale(1.2);
@@ -65,7 +43,7 @@ const StyledLi = styled.li`
 `;
 
 const LogoContainer = styled.div`
-  font-size: 2.5em;
+  font-size: 2.75em;
   font-weight: bold;
   font-family: RalewayBold;
   min-width: 180px;
@@ -77,12 +55,12 @@ const StyledLogo = styled.p`
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  animation: ${fadeInLogo} 2s linear;
+  animation: ${FadeInLogo} 2s linear;
 `;
 
 const Navbar = () => {
   return (
-    <StyledNav>
+    <StyledNav className="nav-container">
       <StyledUlContainer>
         <StyledUl>
           <StyledLi style={{ animationDelay: "0s" }}>
