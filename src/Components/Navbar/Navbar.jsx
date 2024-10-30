@@ -1,4 +1,3 @@
-// components/Navbar/Navbar.js
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { FadeIn, FadeInLogo } from "../../styles/animations";
@@ -63,7 +62,7 @@ const Navbar = () => {
       <StyledUlContainer>
         <StyledUl>
           <StyledLi style={{ animationDelay: "0s" }}>
-            <Link to="/home">Home</Link>
+            <Link to="/">Home</Link>
           </StyledLi>
           <StyledLi style={{ animationDelay: "0.5s" }}>
             <Link to="/shop">Shop</Link>

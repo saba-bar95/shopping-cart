@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Button from "../../styles/Button";
 import scrollToTop from "../../ScrollToTop";
+import { Link } from "react-router-dom";
 
 const StyledContainer = styled.div`
   width: 80%;
@@ -24,6 +25,7 @@ const StyledItemContainer = styled.div`
   justify-content: space-between;
   gap: 5px;
   padding: 10px;
+  align-items: center;
 `;
 
 const StyledHeader = styled.h1`
@@ -36,18 +38,16 @@ const StyledHeader = styled.h1`
 const ImgContainer = styled.div`
   padding: 10px;
   border: 5px solid #e2e8f0;
-  width: 15vw;
   height: 15vw;
-  &:hover {
-    /* your hover styles here */
-  }
+  width: 100%;
 `;
 
 const StyledImg = styled.img`
   width: 100%;
   height: 100%;
-  object-fit: contain; /* scale the image to cover the entire container */
+  object-fit: contain;
 `;
+
 const ButtonsContainer = styled.div`
   margin: auto;
   display: flex;
@@ -88,29 +88,36 @@ const Shop = () => {
     <>
       <Navbar />
       <StyledContainer>
-        <ItemsContainer>
-          {paginatedItems &&
-            paginatedItems.map((item, index) => {
-              return (
-                <StyledItemContainer className="item-container" key={index}>
-                  <ImgContainer>
-                    <StyledImg src={item.image} alt="" />
-                  </ImgContainer>
-                  <StyledHeader>{item.title}</StyledHeader>
-                </StyledItemContainer>
-              );
-            })}
-        </ItemsContainer>
-        <ButtonsContainer>
-          {currentPage > 1 && (
-            <Button onClick={handlePreviousPage}>Back</Button>
-          )}
-          {currentPage < Math.ceil(items.length / itemsPerPage) && (
-            <Button onClick={handleNextPage} $marginLeft="auto">
-              Next
-            </Button>
-          )}
-        </ButtonsContainer>
+        <>
+          <ItemsContainer>
+            {paginatedItems &&
+              paginatedItems.map((item, index) => {
+                return (
+                  <Link
+                    key={index}
+                    to={`/shop/item/${item.id}`}
+                    style={{ textDecoration: "none", color: "inherit" }}>
+                    <StyledItemContainer className="item-container">
+                      <ImgContainer>
+                        <StyledImg src={item.image} alt={item.title} />
+                      </ImgContainer>
+                      <StyledHeader>{item.title}</StyledHeader>
+                    </StyledItemContainer>
+                  </Link>
+                );
+              })}
+          </ItemsContainer>
+          <ButtonsContainer>
+            {currentPage > 1 && (
+              <Button onClick={handlePreviousPage}>Back</Button>
+            )}
+            {currentPage < Math.ceil(items.length / itemsPerPage) && (
+              <Button onClick={handleNextPage} $marginLeft="auto">
+                Next
+              </Button>
+            )}
+          </ButtonsContainer>
+        </>
       </StyledContainer>
     </>
   );

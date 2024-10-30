@@ -1,4 +1,3 @@
-// components/Home.js
 import Navbar from "../../Components/Navbar/Navbar";
 import Main from "../../Components/Main/Main";
 import styled from "styled-components";

@@ -1,6 +1,7 @@
 import Home from "./Pages/Home/Home";
 import Shop from "./Pages/Shop/Shop";
 import ScrollToTop from "./ScrollToTop";
+import ItemDetails from "./Pages/ItemDetails/ItemDetails";
 
 const routes = [
   {
@@ -22,11 +23,11 @@ const routes = [
     ),
   },
   {
-    path: "/home",
+    path: "/shop/item/:id",
     element: (
       <>
         <ScrollToTop />
-        <Home />
+        <ItemDetails />
       </>
     ),
   },
