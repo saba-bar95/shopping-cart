@@ -1,4 +1,3 @@
-import Navbar from "../../Components/Navbar/Navbar";
 import FetchItems from "./FetchItems";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
@@ -86,7 +85,6 @@ const Shop = () => {
 
   return (
     <>
-      <Navbar />
       <StyledContainer>
         <>
           <ItemsContainer>

@@ -1,16 +1,8 @@
-import Navbar from "../../Components/Navbar/Navbar";
-import Main from "../../Components/Main/Main";
 import styled from "styled-components";
-import { FadeIn, FadeFromLeft, FadeFromRight } from "../../styles/animations";
+import { FadeFromRight, FadeIn } from "../../styles/animations";
+import BackgroundImage from "./BackgroundImg";
 
-const StyledNavbar = styled.nav`
-  opacity: 0;
-  animation: ${FadeIn} 1s ease-in-out forwards,
-    ${FadeFromLeft} 1s ease-in-out forwards;
-  animation-delay: 0s;
-`;
-
-const StyledMain = styled.main`
+const StyledHome = styled.div`
   opacity: 0;
   animation: ${FadeIn} 1s ease-in-out forwards,
     ${FadeFromRight} 1s ease-in-out forwards;
@@ -20,12 +12,9 @@ const StyledMain = styled.main`
 const Home = () => {
   return (
     <>
-      <StyledNavbar>
-        <Navbar />
-      </StyledNavbar>
-      <StyledMain>
-        <Main />
-      </StyledMain>
+      <StyledHome className="home-container">
+        <BackgroundImage></BackgroundImage>
+      </StyledHome>
     </>
   );
 };

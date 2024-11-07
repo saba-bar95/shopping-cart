@@ -1,6 +1,7 @@
+import ScrollToTop from "./ScrollToTop";
+import Navbar from "./Components/Navbar/Navbar";
 import Home from "./Pages/Home/Home";
 import Shop from "./Pages/Shop/Shop";
-import ScrollToTop from "./ScrollToTop";
 import ItemDetails from "./Pages/ItemDetails/ItemDetails";
 
 const routes = [
@@ -9,27 +10,17 @@ const routes = [
     element: (
       <>
         <ScrollToTop />
-        <Home />
+        <Navbar />
       </>
     ),
-  },
-  {
-    path: "/shop",
-    element: (
-      <>
-        <ScrollToTop />
-        <Shop />
-      </>
-    ),
-  },
-  {
-    path: "/shop/item/:id",
-    element: (
-      <>
-        <ScrollToTop />
-        <ItemDetails />
-      </>
-    ),
+    children: [
+      { index: true, element: <Home /> },
+      {
+        path: "shop",
+        element: <Shop />,
+      },
+      { path: "/shop/item/:id", element: <ItemDetails /> },
+    ],
   },
 ];
 

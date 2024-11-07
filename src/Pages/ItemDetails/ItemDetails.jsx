@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Navbar from "../../Components/Navbar/Navbar";
 import FetchSingleItem from "./FetchSignleItem";
 
 const ItemDetails = () => {
@@ -21,7 +20,6 @@ const ItemDetails = () => {
 
   return (
     <>
-      <Navbar />
       <h1>{item.title}</h1>
       <img src={item.image} alt={item.title} />
       <p>{item.description}</p>

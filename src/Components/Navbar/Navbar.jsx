@@ -1,6 +1,14 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { FadeIn, FadeInLogo } from "../../styles/animations";
+import { FadeIn, FadeInLogo, FadeFromLeft } from "../../styles/animations";
+import { Outlet } from "react-router-dom";
+
+const StyledNavbar = styled.nav`
+  opacity: 0;
+  animation: ${FadeIn} 1s ease-in-out forwards,
+    ${FadeFromLeft} 1s ease-in-out forwards;
+  animation-delay: 0s;
+`;
 
 const StyledNav = styled.div`
   background-color: #8cd0e3;
@@ -58,25 +66,25 @@ const StyledLogo = styled.p`
 
 const Navbar = () => {
   return (
-    <StyledNav className="nav-container">
-      <StyledUlContainer>
-        <StyledUl>
-          <StyledLi style={{ animationDelay: "0s" }}>
-            <Link to="/">Home</Link>
-          </StyledLi>
-          <StyledLi style={{ animationDelay: "0.5s" }}>
-            <Link to="/shop">Shop</Link>
-          </StyledLi>
-        </StyledUl>
-        <LogoContainer>
-          <StyledLogo>Proxima</StyledLogo>
-        </LogoContainer>
-        <StyledUl>
-          <StyledLi style={{ animationDelay: "1s" }}>About Us</StyledLi>
-          <StyledLi style={{ animationDelay: "1.5s" }}>Contact </StyledLi>
-        </StyledUl>
-      </StyledUlContainer>
-    </StyledNav>
+    <StyledNavbar>
+      <StyledNav className="nav-container">
+        <StyledUlContainer>
+          <LogoContainer>
+            <StyledLogo>Proxima</StyledLogo>
+          </LogoContainer>
+          <StyledUl>
+            <StyledLi style={{ animationDelay: "0.3s" }}>
+              <Link to="/">Home</Link>
+            </StyledLi>
+            <StyledLi style={{ animationDelay: "0.8s" }}>
+              <Link to="/shop">Shop</Link>
+            </StyledLi>
+            <StyledLi style={{ animationDelay: "1.3s" }}>Cart</StyledLi>
+          </StyledUl>
+        </StyledUlContainer>
+      </StyledNav>
+      <Outlet />
+    </StyledNavbar>
   );
 };
 
