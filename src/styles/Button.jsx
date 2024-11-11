@@ -7,7 +7,6 @@ const Button = styled.button`
   border-radius: 10px;
   border: 2px solid #a1a1aa;
   transition: all 0.3s ease-in-out;
-
   ${({ $marginLeft }) => $marginLeft && `margin-left: auto;`}
 
   &:hover {

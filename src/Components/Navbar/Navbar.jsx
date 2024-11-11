@@ -74,7 +74,9 @@ const Navbar = () => {
           </LogoContainer>
           <StyledUl>
             <StyledLi style={{ animationDelay: "0.3s" }}>
-              <Link to="/">Home</Link>
+              <Link to="/" state={{ loaded: true }}>
+                Home
+              </Link>
             </StyledLi>
             <StyledLi style={{ animationDelay: "0.8s" }}>
               <Link to="/shop">Shop</Link>
