@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Button from "../../styles/Button";
 import scrollToTop from "../../ScrollToTop";
 import { Link } from "react-router-dom";
+import { FadeInItem } from "../../styles/animations";
 
 const StyledContainer = styled.div`
   width: 80%;
@@ -25,6 +26,13 @@ const StyledItemContainer = styled.div`
   gap: 5px;
   padding: 10px;
   align-items: center;
+  transition: transform 0.3s ease;
+`;
+
+const AnimatedItem = styled(StyledItemContainer)`
+  opacity: 0;
+  animation: ${FadeInItem} 0.5s ease forwards;
+  animation-delay: ${(props) => props.delay};
 `;
 
 const StyledHeader = styled.h1`
@@ -39,12 +47,23 @@ const ImgContainer = styled.div`
   border: 5px solid #e2e8f0;
   height: 15vw;
   width: 100%;
+  overflow: hidden;
+  transition: border-color 0.3s ease;
+
+  ${StyledItemContainer}:hover & {
+    border-color: orange;
+  }
 `;
 
 const StyledImg = styled.img`
   width: 100%;
   height: 100%;
   object-fit: contain;
+  transition: transform 0.3s ease;
+
+  ${StyledItemContainer}:hover & {
+    transform: scale(1.05);
+  }
 `;
 
 const ButtonsContainer = styled.div`
@@ -84,40 +103,35 @@ const Shop = () => {
   };
 
   return (
-    <>
-      <StyledContainer>
-        <>
-          <ItemsContainer>
-            {paginatedItems &&
-              paginatedItems.map((item, index) => {
-                return (
-                  <Link
-                    key={index}
-                    to={`/shop/item/${item.id}`}
-                    style={{ textDecoration: "none", color: "inherit" }}>
-                    <StyledItemContainer className="item-container">
-                      <ImgContainer>
-                        <StyledImg src={item.image} alt={item.title} />
-                      </ImgContainer>
-                      <StyledHeader>{item.title}</StyledHeader>
-                    </StyledItemContainer>
-                  </Link>
-                );
-              })}
-          </ItemsContainer>
-          <ButtonsContainer>
-            {currentPage > 1 && (
-              <Button onClick={handlePreviousPage}>Back</Button>
-            )}
-            {currentPage < Math.ceil(items.length / itemsPerPage) && (
-              <Button onClick={handleNextPage} $marginLeft="auto">
-                Next
-              </Button>
-            )}
-          </ButtonsContainer>
-        </>
-      </StyledContainer>
-    </>
+    <StyledContainer>
+      <ItemsContainer>
+        {paginatedItems &&
+          paginatedItems.map((item, index) => {
+            const animationDelay = `${index * 100}ms`;
+            return (
+              <Link
+                key={item.id}
+                to={`/shop/item/${item.id}`}
+                style={{ textDecoration: "none", color: "inherit" }}>
+                <AnimatedItem delay={animationDelay}>
+                  <ImgContainer>
+                    <StyledImg src={item.image} alt={item.title} />
+                  </ImgContainer>
+                  <StyledHeader>{item.title}</StyledHeader>
+                </AnimatedItem>
+              </Link>
+            );
+          })}
+      </ItemsContainer>
+      <ButtonsContainer>
+        {currentPage > 1 && <Button onClick={handlePreviousPage}>Back</Button>}
+        {currentPage < Math.ceil(items.length / itemsPerPage) && (
+          <Button onClick={handleNextPage} $marginLeft="auto">
+            Next
+          </Button>
+        )}
+      </ButtonsContainer>
+    </StyledContainer>
   );
 };
 

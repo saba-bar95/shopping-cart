@@ -1,4 +1,3 @@
-// components/animations.js
 import { keyframes } from "styled-components";
 
 const FadeIn = keyframes`
@@ -35,7 +34,6 @@ const FadeFromLeft = keyframes`
   100% {
     transform: translateX(0);
   }
-
 `;
 
 const FadeFromRight = keyframes`
@@ -46,7 +44,17 @@ const FadeFromRight = keyframes`
   100% {
     transform: translateX(0);
   }
-
 `;
 
-export { FadeIn, FadeInLogo, FadeFromLeft, FadeFromRight };
+const FadeInItem = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+
+export { FadeIn, FadeInLogo, FadeFromLeft, FadeFromRight, FadeInItem };

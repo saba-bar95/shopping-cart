@@ -73,14 +73,15 @@ const Navbar = () => {
             <StyledLogo>Proxima</StyledLogo>
           </LogoContainer>
           <StyledUl>
-            <StyledLi style={{ animationDelay: "0.3s" }}>
-              <Link to="/" state={{ loaded: true }}>
-                Home
-              </Link>
-            </StyledLi>
-            <StyledLi style={{ animationDelay: "0.8s" }}>
-              <Link to="/shop">Shop</Link>
-            </StyledLi>
+            <Link
+              to="/"
+              state={{ loaded: true }}
+              style={{ textDecoration: "none" }}>
+              <StyledLi style={{ animationDelay: "0.3s" }}>Home</StyledLi>
+            </Link>
+            <Link to="/shop" style={{ textDecoration: "none" }}>
+              <StyledLi style={{ animationDelay: "0.8s" }}>Shop</StyledLi>
+            </Link>
             <StyledLi style={{ animationDelay: "1.3s" }}>Cart</StyledLi>
           </StyledUl>
         </StyledUlContainer>
