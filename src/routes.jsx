@@ -19,6 +19,10 @@ const routes = [
         path: "shop",
         element: <Shop />,
       },
+      {
+        path: "shop/page/:pageNumber",
+        element: <Shop />,
+      },
       { path: "/shop/item/:id", element: <ItemDetails /> },
     ],
   },

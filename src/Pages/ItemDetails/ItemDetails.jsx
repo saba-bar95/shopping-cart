@@ -6,18 +6,33 @@ import styled from "styled-components";
 const StyledContainer = styled.div`
   margin: 30px auto;
   display: flex;
-  justify-content: center;
   align-items: center;
+  max-width: 1000px;
+  gap: 50px;
+`;
+
+const Loading = styled.div`
+  margin: 20px auto;
 `;
 
 const StyledImage = styled.img`
-  max-width: 100%;
-  height: auto;
+  height: 100%;
+  width: 100%;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  margin: 16px 0;
-  width: 300px;
-  padding: 10px;
+  min-width: 300px;
+  max-width: 500px;
+  object-fit: contain;
+`;
+
+const LeftSide = styled.div`
+  height: 50vh;
+  width: 60vw;
+`;
+
+const RightSide = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 `;
 
 const ItemDetails = () => {
@@ -33,16 +48,18 @@ const ItemDetails = () => {
   }, [id]);
 
   if (!item) {
-    return <div>Loading...</div>;
+    return <Loading>Loading...</Loading>;
   }
 
   return (
     <StyledContainer>
-      <StyledImage src={item.image} alt={item.title} />
-      <div className="right-side">
+      <LeftSide>
+        <StyledImage src={item.image} alt={item.title} />
+      </LeftSide>
+      <RightSide>
         <h1>{item.title}</h1>
         <p>{item.description}</p>
-      </div>
+      </RightSide>
     </StyledContainer>
   );
 };

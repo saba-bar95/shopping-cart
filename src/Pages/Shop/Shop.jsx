@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Button from "../../styles/Button";
 import scrollToTop from "../../ScrollToTop";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { FadeInItem } from "../../styles/animations";
 
 const StyledContainer = styled.div`
@@ -73,9 +73,11 @@ const ButtonsContainer = styled.div`
 `;
 
 const Shop = () => {
+  const { pageNumber } = useParams();
   const [items, setItems] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(Number(pageNumber) || 1);
   const itemsPerPage = 9;
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetch = async () => {
@@ -90,17 +92,20 @@ const Shop = () => {
     scrollToTop();
   }, [currentPage]);
 
+  // Update currentPage whenever pageNumber changes
+  useEffect(() => {
+    if (pageNumber) {
+      const newPage = Number(pageNumber);
+      setCurrentPage(newPage);
+      if (newPage === 1) {
+        navigate("/shop", { replace: true });
+      }
+    }
+  }, [pageNumber, navigate]);
+
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const paginatedItems = items.slice(startIndex, endIndex);
-
-  const handleNextPage = () => {
-    setCurrentPage(currentPage + 1);
-  };
-
-  const handlePreviousPage = () => {
-    setCurrentPage(currentPage - 1);
-  };
 
   return (
     <StyledContainer>
@@ -124,11 +129,17 @@ const Shop = () => {
           })}
       </ItemsContainer>
       <ButtonsContainer>
-        {currentPage > 1 && <Button onClick={handlePreviousPage}>Back</Button>}
+        {currentPage > 1 && (
+          <Link to={`/shop/page/${currentPage - 1}`}>
+            <Button>Back</Button>
+          </Link>
+        )}
         {currentPage < Math.ceil(items.length / itemsPerPage) && (
-          <Button onClick={handleNextPage} $marginLeft="auto">
-            Next
-          </Button>
+          <Link
+            to={`/shop/page/${currentPage + 1}`}
+            style={{ marginLeft: "auto" }}>
+            <Button>Next</Button>
+          </Link>
         )}
       </ButtonsContainer>
     </StyledContainer>
