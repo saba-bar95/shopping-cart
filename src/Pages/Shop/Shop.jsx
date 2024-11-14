@@ -38,8 +38,11 @@ const AnimatedItem = styled(StyledItemContainer)`
 const StyledHeader = styled.h1`
   font-size: 1em;
   flex: 1;
-  align-self: start;
   font-family: LatoBold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 `;
 
 const ImgContainer = styled.div`
@@ -92,7 +95,6 @@ const Shop = () => {
     scrollToTop();
   }, [currentPage]);
 
-  // Update currentPage whenever pageNumber changes
   useEffect(() => {
     if (pageNumber) {
       const newPage = Number(pageNumber);

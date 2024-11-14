@@ -13,8 +13,28 @@ const StyledContainer = styled.div`
 
 const Loading = styled.div`
   margin: 20px auto;
+  font-size: 1.8em;
+  font-family: LatoRegular;
 `;
 
+const StyledHeader = styled.h1`
+  font-size: 2em;
+`;
+
+const StyledPara = styled.p`
+  font-size: 1.2em;
+`;
+
+const StyledPrice = styled.h2`
+  font-size: 1.3em;
+  font-family: RalewayBold;
+`;
+
+const QuantityContainer = styled.div`
+  img {
+    width: 20px;
+  }
+`;
 const StyledImage = styled.img`
   height: 100%;
   width: 100%;
@@ -48,7 +68,11 @@ const ItemDetails = () => {
   }, [id]);
 
   if (!item) {
-    return <Loading>Loading...</Loading>;
+    return (
+      <StyledContainer>
+        <Loading>Loading...</Loading>;
+      </StyledContainer>
+    );
   }
 
   return (
@@ -57,8 +81,11 @@ const ItemDetails = () => {
         <StyledImage src={item.image} alt={item.title} />
       </LeftSide>
       <RightSide>
-        <h1>{item.title}</h1>
-        <p>{item.description}</p>
+        <StyledHeader>{item.title}</StyledHeader>
+        <StyledPara>{item.description}</StyledPara>
+        <StyledPrice>$ {item.price.toFixed(2)}</StyledPrice>
+        <StyledPara>Quantity:</StyledPara>
+        <QuantityContainer></QuantityContainer>
       </RightSide>
     </StyledContainer>
   );
