@@ -32,7 +32,7 @@ const StyledItemContainer = styled.div`
 const AnimatedItem = styled(StyledItemContainer)`
   opacity: 0;
   animation: ${FadeInItem} 0.5s ease forwards;
-  animation-delay: ${(props) => props.delay};
+  animation-delay: ${(props) => props.$delay};
 `;
 
 const StyledHeader = styled.h1`
@@ -120,7 +120,7 @@ const Shop = () => {
                 key={item.id}
                 to={`/shop/item/${item.id}`}
                 style={{ textDecoration: "none", color: "inherit" }}>
-                <AnimatedItem delay={animationDelay}>
+                <AnimatedItem $delay={animationDelay}>
                   <ImgContainer>
                     <StyledImg src={item.image} alt={item.title} />
                   </ImgContainer>
