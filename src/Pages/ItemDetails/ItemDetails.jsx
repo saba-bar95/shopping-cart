@@ -19,7 +19,7 @@ const Loading = styled.div`
 `;
 
 const StyledHeader = styled.h1`
-  font-size: 2em;
+  font-size: 1.8em;
   opacity: 0;
   animation: ${FadeInItem} 0.5s ease forwards;
   animation-delay: ${(props) => props.$delay};

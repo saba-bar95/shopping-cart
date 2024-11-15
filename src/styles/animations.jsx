@@ -40,18 +40,17 @@ const FadeFromRight = keyframes`
   0% {
     transform: translateX(100px);
   }
-
   100% {
     transform: translateX(0);
   }
 `;
 
 const FadeInItem = keyframes`
-  from {
+  0% {
     opacity: 0;
     transform: translateY(20px);
   }
-  to {
+  100% {
     opacity: 1;
     transform: translateY(0);
   }

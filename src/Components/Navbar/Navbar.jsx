@@ -1,16 +1,26 @@
 import { Link } from "react-router-dom";
-import styled from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 import { FadeIn, FadeInLogo, FadeFromLeft } from "../../styles/animations";
 import { Outlet } from "react-router-dom";
+import cart from "/src/assets/images/grocery-store.png";
+import Cart from "../Cart";
+import { useState } from "react";
 
-const StyledNavbar = styled.nav`
+const GlobalStyle = createGlobalStyle`
+  body {
+    overflow: ${({ isCartVisible }) => (isCartVisible ? "hidden" : "scroll")}; 
+    transition: background-color 0.3s ease, opacity 0.3s ease; 
+  }
+`;
+
+const StyledNavbar = styled.div`
   opacity: 0;
   animation: ${FadeIn} 1s ease-in-out forwards,
     ${FadeFromLeft} 1s ease-in-out forwards;
   animation-delay: 0s;
 `;
 
-const StyledNav = styled.div`
+const StyledNav = styled.nav`
   background-color: #8cd0e3;
   width: 100%;
 `;
@@ -29,6 +39,7 @@ const StyledUl = styled.ul`
   display: flex;
   gap: 50px;
   list-style-type: none;
+  align-items: center;
 `;
 
 const StyledLi = styled.li`
@@ -43,6 +54,10 @@ const StyledLi = styled.li`
   cursor: pointer;
   opacity: 0;
   animation: ${FadeIn} 1s ease-in-out forwards;
+
+  img {
+    width: 25px;
+  }
 
   &:hover {
     transform: scale(1.2);
@@ -65,29 +80,45 @@ const StyledLogo = styled.p`
 `;
 
 const Navbar = () => {
+  const [visible, setVisible] = useState(false);
+
+  const close = (e) => {
+    if (!e.target.closest(".container")) setVisible(false);
+  };
+
   return (
-    <StyledNavbar>
-      <StyledNav className="nav-container">
-        <StyledUlContainer>
-          <LogoContainer>
-            <StyledLogo>Proxima</StyledLogo>
-          </LogoContainer>
-          <StyledUl>
-            <Link
-              to="/"
-              state={{ loaded: true }}
-              style={{ textDecoration: "none" }}>
-              <StyledLi style={{ animationDelay: "0.3s" }}>Home</StyledLi>
-            </Link>
-            <Link to="/shop" style={{ textDecoration: "none" }}>
-              <StyledLi style={{ animationDelay: "0.8s" }}>Shop</StyledLi>
-            </Link>
-            <StyledLi style={{ animationDelay: "1.3s" }}>Cart</StyledLi>
-          </StyledUl>
-        </StyledUlContainer>
-      </StyledNav>
-      <Outlet />
-    </StyledNavbar>
+    <>
+      <GlobalStyle isCartVisible={visible} />
+      <StyledNavbar>
+        <StyledNav>
+          <StyledUlContainer>
+            <LogoContainer>
+              <StyledLogo>Proxima</StyledLogo>
+            </LogoContainer>
+            <StyledUl>
+              <Link
+                to="/"
+                state={{ loaded: true }}
+                style={{ textDecoration: "none" }}>
+                <StyledLi style={{ animationDelay: "0.3s" }}>Home</StyledLi>
+              </Link>
+              <Link to="/shop" style={{ textDecoration: "none" }}>
+                <StyledLi style={{ animationDelay: "0.8s" }}>Shop</StyledLi>
+              </Link>
+              <StyledLi
+                style={{ animationDelay: "1.3s" }}
+                onClick={() => {
+                  setVisible((prev) => !prev);
+                }}>
+                <img src={cart} alt="" />
+              </StyledLi>
+            </StyledUl>
+          </StyledUlContainer>
+        </StyledNav>
+        {visible && <Cart onClose={() => setVisible(false)} close={close} />}
+        <Outlet />
+      </StyledNavbar>
+    </>
   );
 };
 

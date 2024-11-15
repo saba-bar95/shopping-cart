@@ -21,7 +21,7 @@ const Home = () => {
 
   return (
     <>
-      <StyledHome className="home-container" $isLoaded={isLoaded}>
+      <StyledHome $isLoaded={isLoaded}>
         <BackgroundImage></BackgroundImage>
       </StyledHome>
     </>
