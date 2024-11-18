@@ -1,8 +1,8 @@
 import ScrollToTop from "./ScrollToTop";
-import Navbar from "./Components/Navbar/Navbar";
 import Home from "./Pages/Home/Home";
 import Shop from "./Pages/Shop/Shop";
 import ItemDetails from "./Pages/ItemDetails/ItemDetails";
+import Main from "./Components/Main";
 
 const routes = [
   {
@@ -10,7 +10,7 @@ const routes = [
     element: (
       <>
         <ScrollToTop />
-        <Navbar />
+        <Main />
       </>
     ),
     children: [

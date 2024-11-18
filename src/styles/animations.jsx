@@ -56,4 +56,27 @@ const FadeInItem = keyframes`
   }
 `;
 
-export { FadeIn, FadeInLogo, FadeFromLeft, FadeFromRight, FadeInItem };
+const FadeInMessage = keyframes`
+   0% {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+`;
+
+export {
+  FadeIn,
+  FadeInLogo,
+  FadeFromLeft,
+  FadeFromRight,
+  FadeInItem,
+  FadeInMessage,
+};

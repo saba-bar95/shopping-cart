@@ -2,7 +2,12 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import FetchSingleItem from "./FetchSignleItem";
 import styled from "styled-components";
-import { FadeFromLeft, FadeInItem } from "../../styles/animations";
+import {
+  FadeFromLeft,
+  FadeInItem,
+  FadeInMessage,
+} from "../../styles/animations";
+import { useOutletContext } from "react-router-dom";
 
 const StyledContainer = styled.div`
   margin: 30px auto;
@@ -10,6 +15,7 @@ const StyledContainer = styled.div`
   align-items: center;
   max-width: 1000px;
   gap: 50px;
+  position: relative;
 `;
 
 const Loading = styled.div`
@@ -115,10 +121,22 @@ const AddToCart = styled.button`
   }
 `;
 
+const StyledMessage = styled.div`
+  margin-top: 10px;
+  font-size: 1.2em;
+  color: #16a34a;
+  opacity: 0;
+  animation: ${FadeInMessage} 2.5s ease forwards;
+  font-family: LatoBold;
+`;
+
 const ItemDetails = () => {
+  const { setItemQuantity } = useOutletContext();
   const { id } = useParams();
   const [item, setItem] = useState(null);
   const [quantity, setQuantity] = useState(1);
+  const [itemAddedMessage, setItemAddedMessage] = useState("");
+  const [delay, setDelay] = useState("1s");
 
   useEffect(() => {
     const fetchItem = async () => {
@@ -131,7 +149,7 @@ const ItemDetails = () => {
   if (!item) {
     return (
       <StyledContainer>
-        <Loading>Loading...</Loading>;
+        <Loading>Loading...</Loading>
       </StyledContainer>
     );
   }
@@ -165,7 +183,26 @@ const ItemDetails = () => {
             </button>
           </div>
         </QuantityContainer>
-        <AddToCart $delay="1s">Add to Cart</AddToCart>
+        <div className="container" style={{ height: "30px" }}>
+          {!itemAddedMessage && (
+            <AddToCart
+              $delay={delay}
+              onClick={() => {
+                setItemQuantity((quan) => quan + quantity);
+                setQuantity(1);
+                setItemAddedMessage("Item added successfully");
+                setDelay("0s");
+                setTimeout(() => {
+                  setItemAddedMessage("");
+                }, 2500);
+              }}>
+              Add to Cart
+            </AddToCart>
+          )}
+          {itemAddedMessage && (
+            <StyledMessage>{itemAddedMessage}</StyledMessage>
+          )}
+        </div>
       </RightSide>
     </StyledContainer>
   );

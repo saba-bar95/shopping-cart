@@ -1,24 +1,10 @@
 import { Link } from "react-router-dom";
-import styled, { createGlobalStyle } from "styled-components";
-import { FadeIn, FadeInLogo, FadeFromLeft } from "../../styles/animations";
-import { Outlet } from "react-router-dom";
+import styled from "styled-components";
+import { FadeIn, FadeInLogo } from "../../styles/animations";
 import cart from "/src/assets/images/grocery-store.png";
 import Cart from "../Cart";
 import { useState } from "react";
-
-const GlobalStyle = createGlobalStyle`
-  body {
-    overflow: ${({ isCartVisible }) => (isCartVisible ? "hidden" : "scroll")}; 
-    transition: background-color 0.3s ease, opacity 0.3s ease; 
-  }
-`;
-
-const StyledNavbar = styled.div`
-  opacity: 0;
-  animation: ${FadeIn} 1s ease-in-out forwards,
-    ${FadeFromLeft} 1s ease-in-out forwards;
-  animation-delay: 0s;
-`;
+import PropTypes from "prop-types";
 
 const StyledNav = styled.nav`
   background-color: #8cd0e3;
@@ -55,8 +41,25 @@ const StyledLi = styled.li`
   opacity: 0;
   animation: ${FadeIn} 1s ease-in-out forwards;
 
-  img {
-    width: 25px;
+  .cart-image-container {
+    position: relative;
+
+    img {
+      width: 25px;
+    }
+
+    .quantity {
+      position: absolute;
+      background-color: red;
+      color: white;
+      z-index: 10;
+      border-radius: 50%;
+      padding: 2px 5px;
+      font-size: 0.4em;
+      top: -10px;
+      right: -10px;
+      -webkit-text-fill-color: initial;
+    }
   }
 
   &:hover {
@@ -79,7 +82,7 @@ const StyledLogo = styled.p`
   animation: ${FadeInLogo} 2s linear;
 `;
 
-const Navbar = () => {
+const Navbar = ({ itemQuantity }) => {
   const [visible, setVisible] = useState(false);
 
   const close = (e) => {
@@ -88,38 +91,43 @@ const Navbar = () => {
 
   return (
     <>
-      <GlobalStyle isCartVisible={visible} />
-      <StyledNavbar>
-        <StyledNav>
-          <StyledUlContainer>
-            <LogoContainer>
-              <StyledLogo>Proxima</StyledLogo>
-            </LogoContainer>
-            <StyledUl>
-              <Link
-                to="/"
-                state={{ loaded: true }}
-                style={{ textDecoration: "none" }}>
-                <StyledLi style={{ animationDelay: "0.3s" }}>Home</StyledLi>
-              </Link>
-              <Link to="/shop" style={{ textDecoration: "none" }}>
-                <StyledLi style={{ animationDelay: "0.8s" }}>Shop</StyledLi>
-              </Link>
-              <StyledLi
-                style={{ animationDelay: "1.3s" }}
-                onClick={() => {
-                  setVisible((prev) => !prev);
-                }}>
+      <StyledNav>
+        <StyledUlContainer>
+          <LogoContainer>
+            <StyledLogo>Proxima</StyledLogo>
+          </LogoContainer>
+          <StyledUl>
+            <Link
+              to="/"
+              state={{ loaded: true }}
+              style={{ textDecoration: "none" }}>
+              <StyledLi style={{ animationDelay: "0.3s" }}>Home</StyledLi>
+            </Link>
+            <Link to="/shop" style={{ textDecoration: "none" }}>
+              <StyledLi style={{ animationDelay: "0.8s" }}>Shop</StyledLi>
+            </Link>
+            <StyledLi
+              style={{ animationDelay: "1.3s" }}
+              onClick={() => {
+                setVisible((prev) => !prev);
+              }}>
+              <div className="cart-image-container">
                 <img src={cart} alt="" />
-              </StyledLi>
-            </StyledUl>
-          </StyledUlContainer>
-        </StyledNav>
-        {visible && <Cart onClose={() => setVisible(false)} close={close} />}
-        <Outlet />
-      </StyledNavbar>
+                {itemQuantity > 0 && (
+                  <div className="quantity">{itemQuantity}</div>
+                )}
+              </div>
+            </StyledLi>
+          </StyledUl>
+        </StyledUlContainer>
+      </StyledNav>
+      {visible && <Cart onClose={() => setVisible(false)} close={close} />}
     </>
   );
+};
+
+Navbar.propTypes = {
+  itemQuantity: PropTypes.number,
 };
 
 export default Navbar;
