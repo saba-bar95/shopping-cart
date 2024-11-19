@@ -5,7 +5,6 @@ import cart from "/src/assets/images/grocery-store.png";
 import Cart from "../Cart";
 import { useState } from "react";
 import PropTypes from "prop-types";
-import itemsArray from "../itemsArray";
 
 const StyledNav = styled.nav`
   background-color: #8cd0e3;
@@ -82,7 +81,7 @@ const StyledLogo = styled.p`
   animation: ${FadeInLogo} 2s linear;
 `;
 
-const Navbar = ({ itemQuantity }) => {
+const Navbar = ({ itemQuantity, setItemQuantity }) => {
   const [visible, setVisible] = useState(false);
 
   const close = (e) => {
@@ -125,7 +124,8 @@ const Navbar = ({ itemQuantity }) => {
         <Cart
           onClose={() => setVisible(false)}
           close={close}
-          items={itemsArray}
+          itemQuantity={itemQuantity}
+          setItemQuantity={setItemQuantity}
         />
       )}
     </>
@@ -134,6 +134,7 @@ const Navbar = ({ itemQuantity }) => {
 
 Navbar.propTypes = {
   itemQuantity: PropTypes.number,
+  setItemQuantity: PropTypes.func,
 };
 
 export default Navbar;

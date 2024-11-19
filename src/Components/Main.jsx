@@ -25,7 +25,9 @@ const Main = () => {
     <>
       <GlobalStyle></GlobalStyle>
       <StyledMain>
-        <Navbar itemQuantity={itemQuantity}></Navbar>
+        <Navbar
+          itemQuantity={itemQuantity}
+          setItemQuantity={setItemQuantity}></Navbar>
         <Outlet context={{ itemQuantity, setItemQuantity }} />
       </StyledMain>
       ;
