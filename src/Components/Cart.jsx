@@ -12,7 +12,7 @@ const CartContainer = styled.div`
   background-color: rgba(0, 0, 0, 0.3);
 
   .container {
-    width: 300px;
+    width: 375px;
     background-color: red;
     position: absolute;
     top: 0;
@@ -29,6 +29,7 @@ const CartContainer = styled.div`
       border-radius: 10px;
       display: flex;
       transition: background-color 0.3s ease;
+      float: right;
 
       img {
         width: 20px;
@@ -41,7 +42,9 @@ const CartContainer = styled.div`
   }
 `;
 
-const Cart = ({ onClose, close }) => {
+const Cart = ({ onClose, close, items }) => {
+  console.log(items);
+
   return (
     <CartContainer onClick={(e) => close(e)}>
       <div className="container">
@@ -56,6 +59,7 @@ const Cart = ({ onClose, close }) => {
 Cart.propTypes = {
   onClose: PropTypes.func.isRequired,
   close: PropTypes.func.isRequired,
+  items: PropTypes.any,
 };
 
 export default Cart;

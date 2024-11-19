@@ -75,6 +75,21 @@ const ButtonsContainer = styled.div`
   justify-content: space-between;
 `;
 
+const Container = styled.div`
+  margin: 30px auto;
+  display: flex;
+  align-items: center;
+  max-width: 1000px;
+  gap: 50px;
+  position: relative;
+`;
+
+const Loading = styled.div`
+  margin: 20px auto;
+  font-size: 1.8em;
+  font-family: LatoRegular;
+`;
+
 const Shop = () => {
   const { pageNumber } = useParams();
   const [items, setItems] = useState([]);
@@ -108,6 +123,14 @@ const Shop = () => {
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const paginatedItems = items.slice(startIndex, endIndex);
+
+  if (!items) {
+    return (
+      <Container>
+        <Loading>Loading...</Loading>
+      </Container>
+    );
+  }
 
   return (
     <StyledContainer>

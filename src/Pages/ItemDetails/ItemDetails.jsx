@@ -8,6 +8,8 @@ import {
   FadeInMessage,
 } from "../../styles/animations";
 import { useOutletContext } from "react-router-dom";
+import itemsArray from "../../Components/itemsArray";
+import addItems from "./addItems";
 
 const StyledContainer = styled.div`
   margin: 30px auto;
@@ -190,6 +192,8 @@ const ItemDetails = () => {
               onClick={() => {
                 setItemQuantity((quan) => quan + quantity);
                 setQuantity(1);
+                addItems(itemsArray, item, quantity);
+
                 setItemAddedMessage("Item added successfully");
                 setDelay("0s");
                 setTimeout(() => {

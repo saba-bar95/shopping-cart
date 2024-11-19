@@ -5,6 +5,7 @@ import cart from "/src/assets/images/grocery-store.png";
 import Cart from "../Cart";
 import { useState } from "react";
 import PropTypes from "prop-types";
+import itemsArray from "../itemsArray";
 
 const StyledNav = styled.nav`
   background-color: #8cd0e3;
@@ -52,7 +53,6 @@ const StyledLi = styled.li`
       position: absolute;
       background-color: red;
       color: white;
-      z-index: 10;
       border-radius: 50%;
       padding: 2px 5px;
       font-size: 0.4em;
@@ -121,7 +121,13 @@ const Navbar = ({ itemQuantity }) => {
           </StyledUl>
         </StyledUlContainer>
       </StyledNav>
-      {visible && <Cart onClose={() => setVisible(false)} close={close} />}
+      {visible && (
+        <Cart
+          onClose={() => setVisible(false)}
+          close={close}
+          items={itemsArray}
+        />
+      )}
     </>
   );
 };
