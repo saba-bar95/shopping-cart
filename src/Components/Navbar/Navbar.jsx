@@ -81,7 +81,7 @@ const StyledLogo = styled.p`
   animation: ${FadeInLogo} 2s linear;
 `;
 
-const Navbar = ({ itemQuantity, setItemQuantity }) => {
+const Navbar = ({ itemQuantity, setItemQuantity, itemsArray }) => {
   const [visible, setVisible] = useState(false);
 
   const close = (e) => {
@@ -126,6 +126,7 @@ const Navbar = ({ itemQuantity, setItemQuantity }) => {
           close={close}
           itemQuantity={itemQuantity}
           setItemQuantity={setItemQuantity}
+          itemsArray={itemsArray}
         />
       )}
     </>
@@ -135,6 +136,7 @@ const Navbar = ({ itemQuantity, setItemQuantity }) => {
 Navbar.propTypes = {
   itemQuantity: PropTypes.number,
   setItemQuantity: PropTypes.func,
+  itemsArray: PropTypes.array,
 };
 
 export default Navbar;

@@ -3,6 +3,7 @@ import { FadeIn, FadeFromLeft } from "../styles/animations";
 import Navbar from "./Navbar/Navbar";
 import { Outlet } from "react-router-dom";
 import { useState } from "react";
+import itemsArray from "./itemsArray";
 
 const StyledMain = styled.div`
   opacity: 0;
@@ -27,7 +28,8 @@ const Main = () => {
       <StyledMain>
         <Navbar
           itemQuantity={itemQuantity}
-          setItemQuantity={setItemQuantity}></Navbar>
+          setItemQuantity={setItemQuantity}
+          itemsArray={itemsArray}></Navbar>
         <Outlet context={{ itemQuantity, setItemQuantity }} />
       </StyledMain>
       ;

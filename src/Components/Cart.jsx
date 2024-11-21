@@ -1,8 +1,6 @@
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import cancel from "/src/assets/images/cancel.png";
-import itemsArray from "./itemsArray";
-import { useState } from "react";
 
 const CartContainer = styled.div`
   position: fixed;
@@ -75,7 +73,7 @@ const CartContainer = styled.div`
           height: 10vh;
           display: flex;
           align-items: center;
-          justify-content: space-between;
+          gap: 40px;
 
           img {
             height: 100%;
@@ -139,30 +137,34 @@ const CartContainer = styled.div`
   }
 `;
 
-const Cart = ({ onClose, close, itemQuantity, setItemQuantity }) => {
-  const [items, setItems] = useState(itemsArray);
-
+const Cart = ({
+  onClose,
+  close,
+  itemQuantity,
+  setItemQuantity,
+  itemsArray,
+}) => {
   const handleDecreaseQuantity = (itemToDecrease) => {
-    setItems((prevItems) =>
-      prevItems.map((item) =>
-        item.id === itemToDecrease.id
-          ? { ...item, quantity: item.quantity - 1 }
-          : item
-      )
+    const itemIndex = itemsArray.findIndex(
+      (item) => item.id === itemToDecrease.id
     );
-
-    setItemQuantity((quan) => quan - 1);
+    if (itemIndex !== -1) {
+      itemsArray[itemIndex].quantity -= 1;
+      if (itemsArray[itemIndex].quantity < 1) {
+        itemsArray.splice(itemIndex, 1);
+      }
+      setItemQuantity((quan) => quan - 1);
+    }
   };
 
   const handleIncreaseQuantity = (itemToIncrease) => {
-    setItems((prevItems) =>
-      prevItems.map((item) =>
-        item.id === itemToIncrease.id
-          ? { ...item, quantity: item.quantity + 1 }
-          : item
-      )
+    const itemIndex = itemsArray.findIndex(
+      (item) => item.id === itemToIncrease.id
     );
-    setItemQuantity((quan) => quan + 1);
+    if (itemIndex !== -1) {
+      itemsArray[itemIndex].quantity += 1;
+      setItemQuantity((quan) => quan + 1);
+    }
   };
 
   return (
@@ -177,30 +179,31 @@ const Cart = ({ onClose, close, itemQuantity, setItemQuantity }) => {
           </p>
         </div>
         <div className="items-container">
-          {items.map((item) => (
-            <div className="item-wrapper" key={item.id}>
-              <div className="top-side">
-                <img src={item.image} alt={item.title} />
-                <div className="info-container">
-                  <h1>{item.title}</h1>
-                  <h2>${item.price}</h2>
+          {itemsArray.map((item) => {
+            return (
+              <div className="item-wrapper" key={item.id}>
+                <div className="top-side">
+                  <img src={item.image} alt={item.title} />
+                  <div className="info-container">
+                    <h1>{item.title}</h1>
+                    <h2>${item.price}</h2>
+                  </div>
+                </div>
+                <div className="bot-side">
+                  <h1>Quantity:</h1>
+                  <div className="buttons-container">
+                    <button onClick={() => handleDecreaseQuantity(item)}>
+                      -
+                    </button>
+                    <p className="number">{item.quantity}</p>
+                    <button onClick={() => handleIncreaseQuantity(item)}>
+                      +
+                    </button>
+                  </div>
                 </div>
               </div>
-              <div className="bot-side">
-                <h1>Quantity:</h1>
-
-                <div className="buttons-container">
-                  <button onClick={() => handleDecreaseQuantity(item)}>
-                    -
-                  </button>
-                  <p className="number">{item.quantity}</p>
-                  <button onClick={() => handleIncreaseQuantity(item)}>
-                    +
-                  </button>
-                </div>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </CartContainer>
@@ -210,9 +213,9 @@ const Cart = ({ onClose, close, itemQuantity, setItemQuantity }) => {
 Cart.propTypes = {
   onClose: PropTypes.func,
   close: PropTypes.func,
-  items: PropTypes.array,
   itemQuantity: PropTypes.number,
   setItemQuantity: PropTypes.func,
+  itemsArray: PropTypes.array,
 };
 
 export default Cart;
