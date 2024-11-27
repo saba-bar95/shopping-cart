@@ -8,7 +8,9 @@ import PropTypes from "prop-types";
 
 const StyledNav = styled.nav`
   background-color: #8cd0e3;
-  width: 100%;
+  position: sticky;
+  z-index: 1;
+  top: 0;
 `;
 
 const StyledUlContainer = styled.div`
@@ -85,7 +87,10 @@ const Navbar = ({ itemQuantity, setItemQuantity, itemsArray }) => {
   const [visible, setVisible] = useState(false);
 
   const close = (e) => {
-    if (!e.target.closest(".container")) setVisible(false);
+    if (!e.target.closest(".container")) {
+      setVisible(false);
+      document.body.style.overflow = "auto";
+    }
   };
 
   return (
@@ -109,6 +114,7 @@ const Navbar = ({ itemQuantity, setItemQuantity, itemsArray }) => {
               style={{ animationDelay: "1.3s" }}
               onClick={() => {
                 setVisible((prev) => !prev);
+                document.body.style.overflow = "hidden";
               }}>
               <div className="cart-image-container">
                 <img src={cart} alt="" />
@@ -122,7 +128,10 @@ const Navbar = ({ itemQuantity, setItemQuantity, itemsArray }) => {
       </StyledNav>
       {visible && (
         <Cart
-          onClose={() => setVisible(false)}
+          onClose={() => {
+            setVisible(false);
+            document.body.style.overflow = "auto";
+          }}
           close={close}
           itemQuantity={itemQuantity}
           setItemQuantity={setItemQuantity}

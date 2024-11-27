@@ -6,19 +6,30 @@ const CartContainer = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 1;
+  z-index: 2;
   height: 100vh;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.3);
 
   .container {
-    width: 375px;
+    width: 25rem;
     position: absolute;
     top: 0;
     right: 0;
-    height: 100vh;
+    height: 100%;
     background-color: #fff;
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: 50px;
+    gap: 30px;
+
+    .top {
+      display: flex;
+      flex-direction: column;
+      overflow-y: scroll;
+    }
 
     .header-container {
       display: flex;
@@ -61,16 +72,16 @@ const CartContainer = styled.div`
       background-color: #fff;
       margin-top: 30px;
       gap: 20px;
+      overflow-y: scroll;
 
       .item-wrapper {
         padding: 15px;
-        border-radius: 10px;
         display: flex;
         flex-direction: column;
-        gap: 15px;
+        gap: 5px;
 
         .top-side {
-          height: 10vh;
+          height: 12vh;
           display: flex;
           align-items: center;
           gap: 40px;
@@ -134,7 +145,21 @@ const CartContainer = styled.div`
         }
       }
     }
+
+    .total-price {
+      font-size: 1.1em;
+      display: flex;
+      justify-content: space-between;
+      font-weight: 700;
+      border-top: 1px solid gray;
+      padding-top: 20px;
+    }
   }
+`;
+
+const Empty = styled.h1`
+  font-size: 1.3em;
+  text-align: center;
 `;
 
 const Cart = ({
@@ -167,44 +192,57 @@ const Cart = ({
     }
   };
 
+  const totalPrice = itemsArray.reduce((accumulator, item) => {
+    return accumulator + item.price * item.quantity;
+  }, 0);
+
   return (
     <CartContainer onClick={(e) => close(e)}>
       <div className="container">
-        <div className="header-container">
-          <h1>
-            Your Cart <span>({itemQuantity} items)</span>
-          </h1>
-          <p onClick={onClose}>
-            <img src={cancel} alt="" />
-          </p>
-        </div>
-        <div className="items-container">
-          {itemsArray.map((item) => {
-            return (
-              <div className="item-wrapper" key={item.id}>
-                <div className="top-side">
-                  <img src={item.image} alt={item.title} />
-                  <div className="info-container">
-                    <h1>{item.title}</h1>
-                    <h2>${item.price}</h2>
+        <div className="top">
+          <div className="header-container">
+            <h1>
+              Your Cart <span>({itemQuantity} items)</span>
+            </h1>
+            <p onClick={onClose}>
+              <img src={cancel} alt="" />
+            </p>
+          </div>
+          <div className="items-container">
+            {itemsArray.map((item) => {
+              return (
+                <div className="item-wrapper" key={item.id}>
+                  <div className="top-side">
+                    <img src={item.image} alt={item.title} />
+                    <div className="info-container">
+                      <h1>{item.title}</h1>
+                      <h2>${item.price}</h2>
+                    </div>
+                  </div>
+                  <div className="bot-side">
+                    <h1>Quantity:</h1>
+                    <div className="buttons-container">
+                      <button onClick={() => handleDecreaseQuantity(item)}>
+                        -
+                      </button>
+                      <p className="number">{item.quantity}</p>
+                      <button onClick={() => handleIncreaseQuantity(item)}>
+                        +
+                      </button>
+                    </div>
                   </div>
                 </div>
-                <div className="bot-side">
-                  <h1>Quantity:</h1>
-                  <div className="buttons-container">
-                    <button onClick={() => handleDecreaseQuantity(item)}>
-                      -
-                    </button>
-                    <p className="number">{item.quantity}</p>
-                    <button onClick={() => handleIncreaseQuantity(item)}>
-                      +
-                    </button>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
+          {itemsArray.length < 1 && <Empty>Your cart is empty</Empty>}
         </div>
+        {totalPrice > 0 && (
+          <div className="total-price">
+            <p>Subtotal</p>
+            <p>$ {totalPrice.toFixed(2)} </p>
+          </div>
+        )}
       </div>
     </CartContainer>
   );

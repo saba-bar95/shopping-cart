@@ -14,7 +14,6 @@ const StyledMain = styled.div`
 
 const GlobalStyle = createGlobalStyle`
   body {
-    overflow: ${({ isCartVisible }) => (isCartVisible ? "hidden" : "scroll")}; 
     transition: background-color 0.3s ease, opacity 0.3s ease; 
   }
 `;
@@ -32,7 +31,6 @@ const Main = () => {
           itemsArray={itemsArray}></Navbar>
         <Outlet context={{ itemQuantity, setItemQuantity }} />
       </StyledMain>
-      ;
     </>
   );
 };
