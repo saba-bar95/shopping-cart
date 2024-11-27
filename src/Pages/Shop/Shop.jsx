@@ -86,7 +86,7 @@ const Container = styled.div`
 
 const Loading = styled.div`
   margin: 20px auto;
-  font-size: 1.8em;
+  font-size: 1.5em;
   font-family: LatoRegular;
 `;
 
@@ -114,9 +114,6 @@ const Shop = () => {
     if (pageNumber) {
       const newPage = Number(pageNumber);
       setCurrentPage(newPage);
-      if (newPage === 1) {
-        navigate("/shop", { replace: true });
-      }
     }
   }, [pageNumber, navigate]);
 
@@ -124,7 +121,7 @@ const Shop = () => {
   const endIndex = startIndex + itemsPerPage;
   const paginatedItems = items.slice(startIndex, endIndex);
 
-  if (!items) {
+  if (items.length < 10) {
     return (
       <Container>
         <Loading>Loading...</Loading>

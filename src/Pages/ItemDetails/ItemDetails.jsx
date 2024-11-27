@@ -22,7 +22,7 @@ const StyledContainer = styled.div`
 
 const Loading = styled.div`
   margin: 20px auto;
-  font-size: 1.8em;
+  font-size: 1.5em;
   font-family: LatoRegular;
 `;
 

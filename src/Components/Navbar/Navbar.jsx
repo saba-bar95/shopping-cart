@@ -102,7 +102,7 @@ const Navbar = ({ itemQuantity, setItemQuantity, itemsArray }) => {
               style={{ textDecoration: "none" }}>
               <StyledLi style={{ animationDelay: "0.3s" }}>Home</StyledLi>
             </Link>
-            <Link to="/shop" style={{ textDecoration: "none" }}>
+            <Link to="/shop/page/1" style={{ textDecoration: "none" }}>
               <StyledLi style={{ animationDelay: "0.8s" }}>Shop</StyledLi>
             </Link>
             <StyledLi
