@@ -3,20 +3,18 @@ import PropTypes from "prop-types";
 import cancel from "/src/assets/images/cancel.png";
 
 const CartContainer = styled.div`
+  background-color: rgba(0, 0, 0, 0.3);
   position: fixed;
   top: 0;
+  bottom: 0;
   left: 0;
+  right: 0;
   z-index: 2;
-  height: 100vh;
-  width: 100%;
-  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: end;
 
   .container {
     width: 25rem;
-    position: absolute;
-    top: 0;
-    right: 0;
-    height: 100%;
     background-color: #fff;
     padding: 20px;
     display: flex;
@@ -24,11 +22,15 @@ const CartContainer = styled.div`
     justify-content: space-between;
     padding-bottom: 50px;
     gap: 30px;
+    position: sticky;
+    right: 0;
+    top: 0;
+    height: 100vh;
 
     .top {
       display: flex;
       flex-direction: column;
-      overflow-y: scroll;
+      overflow-y: auto;
     }
 
     .header-container {
@@ -72,7 +74,7 @@ const CartContainer = styled.div`
       background-color: #fff;
       margin-top: 30px;
       gap: 20px;
-      overflow-y: scroll;
+      overflow-y: auto;
 
       .item-wrapper {
         padding: 15px;

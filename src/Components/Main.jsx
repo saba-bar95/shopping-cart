@@ -10,6 +10,7 @@ const StyledMain = styled.div`
   animation: ${FadeIn} 1s ease-in-out forwards,
     ${FadeFromLeft} 1s ease-in-out forwards;
   animation-delay: 0s;
+  min-height: 100vh;
 `;
 
 const GlobalStyle = createGlobalStyle`
