@@ -8,7 +8,7 @@ const StyledHome = styled.div`
   animation: ${FadeIn} 1s ease-in-out forwards,
     ${FadeFromRight} 1s ease-in-out forwards;
   ${({ $isLoaded }) => !$isLoaded && `animation-delay: 1s;`};
-  background-image: url("src/assets/images/background.jpg");
+  background-image: url("/src/assets/images/background.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
