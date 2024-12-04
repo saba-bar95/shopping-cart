@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import cancel from "/src/assets/images/cancel.png";
+import { FadeFromRight, FadeIn } from "../styles/animations";
 
 const CartContainer = styled.div`
   background-color: rgba(0, 0, 0, 0.3);
@@ -26,6 +27,8 @@ const CartContainer = styled.div`
     right: 0;
     top: 0;
     height: 100vh;
+    animation: ${FadeFromRight} 0.5s forwards,
+      ${FadeIn} 0.5s ease-in-out forwards;
 
     .top {
       display: flex;
