@@ -2,13 +2,15 @@ import styled from "styled-components";
 import { FadeFromRight, FadeIn } from "../../styles/animations";
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import background from "../../assets/images/background.jpg";
 
 const StyledHome = styled.div`
   opacity: 0;
   animation: ${FadeIn} 1s ease-in-out forwards,
     ${FadeFromRight} 1s ease-in-out forwards;
   ${({ $isLoaded }) => !$isLoaded && `animation-delay: 1s;`};
-  background-image: url("/src/assets/images/background.jpg");
+  animation-delay: 1s;
+  background-image: url(${background});
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
@@ -20,21 +22,23 @@ const WelcomeContainer = styled.div`
   text-align: center;
   min-height: 100vh;
 `;
+
 const WelcomeTitle = styled.h1`
   font-size: 3em;
   color: lavenderblush;
   margin-bottom: 20px;
   opacity: 0;
   animation: ${FadeIn} 1s ease-in-out forwards;
-  ${({ $isLoaded }) => !$isLoaded && `animation-delay: 1.5s;`};
+  animation-delay: 1s;
 `;
+
 const WelcomeText = styled.p`
   font-size: 1.5em;
   color: floralwhite;
   font-weight: 800;
   opacity: 0;
   animation: ${FadeIn} 1s ease-in-out forwards;
-  ${({ $isLoaded }) => !$isLoaded && `animation-delay: 2s;`};
+  animation-delay: 1.5s;
 `;
 
 const Home = () => {
